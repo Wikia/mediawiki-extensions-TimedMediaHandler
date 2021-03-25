@@ -261,6 +261,9 @@
 		// Widget loaded should only fire once
 		widgetLoaded: false,
 
+		// Save original player width
+		playerWidth: 0,
+
 		/**
 		 * embedPlayer
 		 *
@@ -275,6 +278,10 @@
 			mw.log( 'EmbedPlayer: initEmbedPlayer: ' + $( element ).width() );
 
 			playerAttributes = config[ 'EmbedPlayer.Attributes' ];
+
+			// if element is in collapsable section, getPlayerWidth will return 0, and therefore player buttons
+			// will not be visible
+			this.playerWidth = $( element ).width();
 
 			// Store the rewrite element tag type
 			this.rewriteElementTagName = element.tagName.toLowerCase();
@@ -576,7 +583,7 @@
 			if ( profile.name === 'firefox' && profile.versionNumber < 2 ) {
 				return ( $( this ).parent().parent().width() );
 			}
-			return $( this ).width();
+			return $( this ).width() || this.playerWidth;
 		},
 
 		/**
