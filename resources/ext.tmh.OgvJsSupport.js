@@ -30,7 +30,12 @@
 			 */
 			canPlayNatively: function () {
 				var el = document.createElement( 'video' );
-				if ( el && el.canPlayType && el.canPlayType( 'video/webm; codecs="opus,vp9"' ) ) {
+				// Fandom fork!
+				// We check for 'application/ogg' support instead
+				// as we're not ready at the moment to server WebM from Thumblr.
+				// Follow-up to implement such a support:
+				// https://fandom.atlassian.net/browse/PLATFORM-7340
+				if ( el && el.canPlayType && el.canPlayType( 'application/ogg' ) ) {
 					return true;
 				}
 				return false;
